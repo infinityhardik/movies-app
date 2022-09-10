@@ -2,6 +2,7 @@ import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import './ReleasedMovieContent.css'
 
 const ReleasedMovieContent = ({ data }) => {
 
@@ -13,10 +14,10 @@ const ReleasedMovieContent = ({ data }) => {
 
     return (
         <ImageList sx={{
-            height:350
+            height: 350
         }} cols={4}>
             {data.map((item) => (
-                <ImageListItem key={item.id} >
+                <ImageListItem key={item.id} className='imageItem'>
                     <img
                         src={item.poster_url}
                         alt={item.title}
