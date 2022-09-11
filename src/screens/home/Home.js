@@ -18,7 +18,7 @@ export const Home = () => {
                 </div>
                 <div className='right'>
                     {/* Filter Container */}
-                    Filters
+                    Filter Component
                 </div>
             </div>
         </div>
