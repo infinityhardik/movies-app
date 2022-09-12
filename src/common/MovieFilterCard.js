@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { TextField, FormControl, Button} from '@mui/material';
 import GenreSelect from "./GenreSelect"
+import ArtistSelect from"./ArtistSelect"
 
 const card = (
     <React.Fragment>
@@ -27,13 +28,7 @@ const card = (
                     <GenreSelect />
                 </CardActions>
                 <CardActions>
-                    <TextField
-                        id="artistSearch"
-                        label="Artists"
-                        type="search"
-                        variant="standard"
-                        fullWidth
-                    />
+                    <ArtistSelect />
                 </CardActions>
                 <CardActions>
                     <TextField
