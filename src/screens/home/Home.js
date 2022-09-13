@@ -1,10 +1,10 @@
 import React from 'react'
-import moviesData from '../../common/moviesData'
+import moviesData from '../../assets/moviesData'
 import './Home.css'
 import Header from '../../common/header/Header'
-import GridList from '../../common/GridList'
-import ReleasedMovieContent from '../../common/ReleasedMovieContent'
-import MovieFilterCard from "../../common/MovieFilterCard"
+import GridList from './GridList'
+import ReleasedMovieContent from './ReleasedMovieContent'
+import MovieFilterCard from "./MovieFilterCard"
 
 export const Home = () => {
     return (

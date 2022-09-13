@@ -5,18 +5,18 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
-import artists from "./artists"
+import genres from "../../assets/genre"
 
 
 
 export default function GenreSelect() {
-    const [artistName, setArtistName] = React.useState([]);
+    const [genreName, setGenreName] = React.useState([]);
 
     const handleChange = (event) => {
         const {
             target: { value },
         } = event;
-        setArtistName(
+        setGenreName(
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
@@ -25,19 +25,20 @@ export default function GenreSelect() {
     return (
         <div>
             <FormControl variant="standard" sx={{ width: 240 }}>
-                <InputLabel id="artistSearchLabel">Artists</InputLabel>
+                <InputLabel id="genreSearchLabel">Genres</InputLabel>
                 <Select
-                    labelId="artistSearchLabel"
-                    id="artistSearch"
+                    labelId="genreSearchLabel"
+                    id="genreSearch"
                     multiple
-                    value={artistName}
+                    value={genreName}
                     onChange={handleChange}
+                    // input={<OutlinedInput label="" />}
                     renderValue={(selected) => selected.join(', ')}
                 >
-                    {artists.map((item) => (
-                        <MenuItem key={item.id} value={item.first_name + " " + item.last_name}>
-                            <Checkbox checked={artistName.indexOf(item.first_name + " " + item.last_name) > -1} />
-                            <ListItemText primary={item.first_name + " " + item.last_name} />
+                    {genres.map((item) => (
+                        <MenuItem key={item.id} value={item.name}>
+                            <Checkbox checked={genreName.indexOf(item.name) > -1} />
+                            <ListItemText primary={item.name} />
                         </MenuItem>
                     ))}
                 </Select>

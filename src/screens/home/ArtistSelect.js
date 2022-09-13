@@ -5,18 +5,18 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
-import genres from "./genre"
+import artists from "../../assets/artists"
 
 
 
 export default function GenreSelect() {
-    const [genreName, setGenreName] = React.useState([]);
+    const [artistName, setArtistName] = React.useState([]);
 
     const handleChange = (event) => {
         const {
             target: { value },
         } = event;
-        setGenreName(
+        setArtistName(
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
@@ -25,20 +25,19 @@ export default function GenreSelect() {
     return (
         <div>
             <FormControl variant="standard" sx={{ width: 240 }}>
-                <InputLabel id="genreSearchLabel">Genres</InputLabel>
+                <InputLabel id="artistSearchLabel">Artists</InputLabel>
                 <Select
-                    labelId="genreSearchLabel"
-                    id="genreSearch"
+                    labelId="artistSearchLabel"
+                    id="artistSearch"
                     multiple
-                    value={genreName}
+                    value={artistName}
                     onChange={handleChange}
-                    // input={<OutlinedInput label="" />}
                     renderValue={(selected) => selected.join(', ')}
                 >
-                    {genres.map((item) => (
-                        <MenuItem key={item.id} value={item.name}>
-                            <Checkbox checked={genreName.indexOf(item.name) > -1} />
-                            <ListItemText primary={item.name} />
+                    {artists.map((item) => (
+                        <MenuItem key={item.id} value={item.first_name + " " + item.last_name}>
+                            <Checkbox checked={artistName.indexOf(item.first_name + " " + item.last_name) > -1} />
+                            <ListItemText primary={item.first_name + " " + item.last_name} />
                         </MenuItem>
                     ))}
                 </Select>
