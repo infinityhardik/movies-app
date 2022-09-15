@@ -4,6 +4,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import GenreSelect from "./GenreSelect"
 import ArtistSelect from "./ArtistSelect"
 
+// passing all the required data as parameter to the card variable for use in Filter Card
+
 const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultData) => (
     <React.Fragment>
         <CardContent>
@@ -23,9 +25,11 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
                 </CardActions>
                 <CardActions>
                     <GenreSelect setFilterObject={setFilterObject} filterObject={filterObject} />
+                    {/* Passing setFilterObject and filterObject as props to GenreSelect Component */}
                 </CardActions>
                 <CardActions>
                     <ArtistSelect setFilterObject={setFilterObject} filterObject={filterObject} />
+                    {/* Passing setFilterObject and filterObject as props to ArtistSelect Component */}
                 </CardActions>
                 <CardActions>
                     <TextField
@@ -38,7 +42,11 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
                             shrink: true,
                         }}
                         fullWidth
-                        onChange={(event) => setFilterObject({ ...filterObject, startDate: event.target.value })}
+                        onChange={(event) => {
+                            let d = new Date(event.target.value);
+                            setFilterObject({ ...filterObject, startDate: d.toISOString() })
+                            // Converting the Date Format to ISO String in order to match the Data being received from the Server
+                        }}
                     />
                 </CardActions>
                 <CardActions>
@@ -52,18 +60,47 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
                             shrink: true,
                         }}
                         fullWidth
-                        onChange={(event) => setFilterObject({ ...filterObject, endDate: event.target.value })}
+                        onChange={(event) => {
+                            let d = new Date(event.target.value);
+                            setFilterObject({ ...filterObject, endDate: d.toISOString() })
+                            // Converting the Date Format to ISO String in order to match the Data being received from the Server
+                        }}
                     />
                 </CardActions>
             </FormControl>
             <CardActions sx={{
                 marginTop: "10px"
             }}>
-                <Button variant="contained" fullWidth onClick={() =>
-                    setMoviesData(() => moviesData.filter(movie => {
-                        // return movie.title.toLowerCase().includes(filterObject.title.toLowerCase());
-                    }))
-                }>
+                <Button variant="contained" fullWidth onClick={() => {
+                    let filteredMovies = moviesData.filter(movie => {
+                        // setting a Flag to apply all the Filters on Movies Data 
+                        let flag = true;
+                        if (flag && filterObject.title !== undefined) {
+                            if (!movie.title.toLowerCase().includes(filterObject.title.toLowerCase()))
+                                flag = false;
+                        }
+                        if (flag && filterObject.genres !== undefined) {
+                            if (!movie.genres.some(genreName => filterObject.genres.includes(genreName)))
+                                flag = false;
+                        }
+                        if (flag && filterObject.artists !== undefined) {
+                            if (!movie.artists.some(item => filterObject.artists.includes(item.first_name + " " + item.last_name)))
+                                flag = false;
+                        }
+                        if (flag && filterObject.startDate !== undefined) {
+                            if (movie.release_date < filterObject.startDate)
+                                flag = false;
+                        }
+                        if (flag && filterObject.endDate !== undefined) {
+                            if (movie.release_date > filterObject.endDate)
+                                flag = false;
+                        }
+
+                        if (flag) return movie;
+                    }
+                    );
+                    setMoviesData(filteredMovies);
+                }}>
                     APPLY
                 </Button>
                 <IconButton aria-label="delete" size="small" onClick={() =>
@@ -73,8 +110,11 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
                 </IconButton>
             </CardActions>
         </CardContent>
-    </React.Fragment>
+    </React.Fragment >
 );
+
+
+// Destructuring the data being received as props and exporting default function as a Wrapper for the Complete Filter Card Functionality.
 
 export default function MovieFilterCard({ setMoviesData, moviesData, defaultData }) {
 
@@ -85,8 +125,8 @@ export default function MovieFilterCard({ setMoviesData, moviesData, defaultData
         // startDate: "",
         // endDate: ""
     });
-    // Test Data is used above for Filter Object
-    console.log(filterObject);
+    // Properties used for Filter Object
+    // console.log(filterObject);
 
     return (
         <Box sx={{ minWidth: 275 }} >
