@@ -18,7 +18,7 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
                         type="search"
                         variant="standard"
                         fullWidth
-                        onChange={(event) => setFilterObject({ ...filterObject, movieName: event.target.value })}
+                        onChange={(event) => setFilterObject({ ...filterObject, title: event.target.value })}
                     />
                 </CardActions>
                 <CardActions>
@@ -61,7 +61,7 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
             }}>
                 <Button variant="contained" fullWidth onClick={() =>
                     setMoviesData(() => moviesData.filter(movie => {
-                        return movie.title.toLowerCase().includes(filterObject.movieName.toLowerCase());
+                        // return movie.title.toLowerCase().includes(filterObject.title.toLowerCase());
                     }))
                 }>
                     APPLY
@@ -79,14 +79,14 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
 export default function MovieFilterCard({ setMoviesData, moviesData, defaultData }) {
 
     const [filterObject, setFilterObject] = useState({
-        // movieName: "",
-        // genreName: "",
-        // artistName: "",
+        // title: "",
+        // genres: "",
+        // artists: "",
         // startDate: "",
         // endDate: ""
     });
     // Test Data is used above for Filter Object
-    // console.log(filterObject);
+    console.log(filterObject);
 
     return (
         <Box sx={{ minWidth: 275 }} >
