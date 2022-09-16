@@ -43,9 +43,13 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
                         }}
                         fullWidth
                         onChange={(event) => {
-                            let d = new Date(event.target.value);
-                            setFilterObject({ ...filterObject, startDate: d.toISOString() })
-                            // Converting the Date Format to ISO String in order to match the Data being received from the Server
+                            if (isValidDate(event.target.value)) {
+                                let d = new Date(event.target.value);
+                                setFilterObject({ ...filterObject, startDate: d.toISOString() })
+                                // Converting the Date Format to ISO String in order to match the Data being received from the Server
+                            } else {
+                                setFilterObject({ ...filterObject, startDate: undefined })
+                            }
                         }}
                     />
                 </CardActions>
@@ -61,9 +65,13 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
                         }}
                         fullWidth
                         onChange={(event) => {
-                            let d = new Date(event.target.value);
-                            setFilterObject({ ...filterObject, endDate: d.toISOString() })
-                            // Converting the Date Format to ISO String in order to match the Data being received from the Server
+                            if (isValidDate(event.target.value)) {
+                                let d = new Date(event.target.value);
+                                setFilterObject({ ...filterObject, endDate: d.toISOString() })
+                                // Converting the Date Format to ISO String in order to match the Data being received from the Server
+                            } else {
+                                setFilterObject({ ...filterObject, endDate: undefined })
+                            }
                         }}
                     />
                 </CardActions>
@@ -84,7 +92,7 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
                                 flag = false;
                         }
                         if (flag && filterObject.artists !== undefined) {
-                            if (!movie.artists.some(item => filterObject.artists.includes(item.first_name + " " + item.last_name)))
+                            if (!movie.artists.some(item => filterObject.artists.includes(`${item.first_name} ${item.last_name}`)))
                                 flag = false;
                         }
                         if (flag && filterObject.startDate !== undefined) {
@@ -113,6 +121,10 @@ const card = (setFilterObject, filterObject, setMoviesData, moviesData, defaultD
     </React.Fragment >
 );
 
+const isValidDate = function (date) {
+    return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
+}
+
 
 // Destructuring the data being received as props and exporting default function as a Wrapper for the Complete Filter Card Functionality.
 
@@ -126,7 +138,7 @@ export default function MovieFilterCard({ setMoviesData, moviesData, defaultData
         // endDate: ""
     });
     // Properties used for Filter Object
-    // console.log(filterObject);
+    console.log(filterObject);
 
     return (
         <Box sx={{ minWidth: 275 }} >

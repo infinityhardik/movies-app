@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
-import defaultData from '../../assets/moviesData'
+import React from 'react'
 import './Home.css'
 import Header from '../../common/header/Header'
 import GridList from './GridList'
 import ReleasedMovieContent from './ReleasedMovieContent'
 import MovieFilterCard from "./MovieFilterCard"
 
-export const Home = () => {
-    const [moviesData, setMoviesData] = useState(defaultData);
+export const Home = ({ moviesData, setMoviesData, defaultData }) => {
 
     return (
         <div>
@@ -20,7 +18,7 @@ export const Home = () => {
                 </div>
                 <div className='right'>
                     {/* Filter Container */}
-                    <MovieFilterCard setMoviesData={setMoviesData} moviesData={moviesData} defaultData={defaultData}/>
+                    <MovieFilterCard setMoviesData={setMoviesData} moviesData={moviesData} defaultData={defaultData} />
                 </div>
             </div>
         </div>
