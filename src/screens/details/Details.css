@@ -9,14 +9,14 @@
   /* Margin Shorthand for Top, Right, Bottom, Left */
 }
 
-.left {
+.leftDetails {
   width: 20%;
 }
 
-.middle {
+.middleDetails {
   width: 60%;
 }
 
-.right {
+.rightDetails {
   width: 20%;
 }

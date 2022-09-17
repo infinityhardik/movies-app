@@ -19,9 +19,9 @@ export default function Details({ movieInfo }) {
             </Typography>
 
             <div className='container'>
-                <div className='left'><Left movieInfo={movieInfo} /></div>
-                <div className='middle'><Middle movieInfo={movieInfo} /></div>
-                <div className='right'><Right movieInfo={movieInfo} /></div>
+                <div className='leftDetails'><Left movieInfo={movieInfo} /></div>
+                <div className='middleDetails'><Middle movieInfo={movieInfo} /></div>
+                <div className='rightDetails'><Right movieInfo={movieInfo} /></div>
             </div>
         </>
     )
