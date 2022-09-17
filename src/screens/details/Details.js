@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography } from '@mui/material'
+import { Link } from "react-router-dom";
 import './Details.css'
 import Header from '../../common/header/Header'
 import Left from './Left'
@@ -10,13 +11,15 @@ export default function Details({ movieInfo }) {
     return (
         <>
             <Header bookShow={true} />
-            <Typography className="goBackToHome" variant='button' sx={{
-                margin: "8px 0px 0px 24px ",
-                // Margin Shorthand for Top, Right, Bottom, Left
-                height: "24px"
-            }}>
-                {`<`} Back to Home
-            </Typography>
+            <Link to='/'>
+                <Typography className="goBackToHome" variant='button' sx={{
+                    margin: "8px 0px 0px 24px ",
+                    // Margin Shorthand for Top, Right, Bottom, Left
+                    height: "24px"
+                }}>
+                    {`<`} Back to Home
+                </Typography>
+            </Link>
 
             <div className='container'>
                 <div className='leftDetails'><Left movieInfo={movieInfo} /></div>
